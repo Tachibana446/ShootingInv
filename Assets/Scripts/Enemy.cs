@@ -29,4 +29,20 @@ public class Enemy : MonoBehaviour
         newPos.x += x; newPos.z += z;
         transform.position = newPos;
     }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other);
+        if (other.gameObject.tag == "Bullet")
+        {
+            Player.Score += Score;
+            isDead = true;
+            Destroy(other.gameObject);
+            // TODO:SE
+
+            Destroy(this.gameObject);
+        }
+    }
+
 }

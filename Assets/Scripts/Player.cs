@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public static int Score = 0;
+    public Bullet bulletPrefab;
 
     public float move = 0.3f;
     public static float worldLeft, worldRight;
     public static float worldTop, worldBottom;
+
     /// <summary>
     /// ViewportToWorldPointの誤差
     /// </summary>
@@ -36,8 +39,10 @@ public class Player : MonoBehaviour
         InputKeys();
     }
 
+    int remainShot = 0;
+
     /// <summary>
-    /// キー入力による移動
+    /// キー入力による移動・攻撃
     /// </summary>
     void InputKeys()
     {
@@ -57,6 +62,16 @@ public class Player : MonoBehaviour
             pos.x = worldLeft + 1f;
         // 反映
         transform.position = pos;
+
+        // 攻撃
+        if (remainShot <= 0 && Input.GetButton("Fire1"))
+        {
+            var b = Instantiate(bulletPrefab);
+            b.transform.position = transform.position;
+            remainShot = 30;
+            // TODO:SE
+        }
+        remainShot--;
     }
 }
 
