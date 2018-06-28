@@ -23,8 +23,8 @@ public class Player : MonoBehaviour
         float distance = Vector3.Distance(camera.transform.position, terrain.transform.position);
         worldLeft = camera.ViewportToWorldPoint(new Vector3(0, 0, distance)).x * worldRate;
         worldRight = camera.ViewportToWorldPoint(new Vector3(1, 0, distance)).x * worldRate;
-        worldTop = camera.ViewportToWorldPoint(new Vector3(0, 1, distance)).y * worldRate;
-        worldBottom = camera.ViewportToWorldPoint(new Vector3(0, 0, distance)).y * worldRate;
+        worldTop = camera.ViewportToWorldPoint(new Vector3(0, 1, distance)).z * worldRate;
+        worldBottom = camera.ViewportToWorldPoint(new Vector3(0, 0, distance)).z * worldRate;
         Debug.Log(worldLeft);
         Debug.Log(worldRight);
     }

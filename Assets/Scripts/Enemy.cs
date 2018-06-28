@@ -23,10 +23,10 @@ public class Enemy : MonoBehaviour
 
     }
 
-    public void Move(float x, float y)
+    public void Move(float x, float z)
     {
         var newPos = transform.position;
-        newPos.x += x; newPos.y += y;
+        newPos.x += x; newPos.z += z;
         transform.position = newPos;
     }
 }

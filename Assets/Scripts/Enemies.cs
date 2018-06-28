@@ -16,7 +16,7 @@ public class Enemies : MonoBehaviour
     float spaceY = (Player.worldTop - Player.worldBottom) / 11f;
 
     bool isAppeared = false;
-    float moveDistance = 0.1f;
+    float moveDistance = 0.5f;
     Direction MoveDir = Direction.Right;
     Direction nextDir;
     int downRemain;
@@ -51,12 +51,19 @@ public class Enemies : MonoBehaviour
 
     void Appear()
     {
+        // Init
+        if (spaceX == 0 || spaceY == 0)
+        {
+            spaceX = (Player.worldRight - Player.worldLeft) / 12f;
+            spaceY = (Player.worldTop - Player.worldBottom) / 11f;
+        }
+        // Create
         for (int x = 0; x < 11; x++)
         {
             for (int y = 0; y < 5; y++)
             {
                 var enemy = Instantiate(enemyPrefab);
-                enemy.transform.position = new Vector3(Player.worldLeft + spaceX * x, Player.worldTop - spaceY * y, 0);
+                enemy.transform.position = new Vector3(Player.worldLeft + spaceX * x, 0, Player.worldTop - spaceY * y);
                 enemy.Score = y == 0 ? 30 : y < 3 ? 20 : 10;
                 enemyList.Add(enemy);
             }
@@ -84,7 +91,7 @@ public class Enemies : MonoBehaviour
             {
                 nextDir = Direction.Left;
                 MoveDir = Direction.Down;
-                downRemain = 10;
+                downRemain = (int)(1f / moveDistance);
             }
         }
         else if (MoveDir == Direction.Left)
@@ -94,7 +101,7 @@ public class Enemies : MonoBehaviour
             {
                 nextDir = Direction.Right;
                 MoveDir = Direction.Down;
-                downRemain = 10;
+                downRemain = (int)(1f / moveDistance);
             }
         }
         else if (MoveDir == Direction.Down)
@@ -103,7 +110,7 @@ public class Enemies : MonoBehaviour
             downRemain--;
             if (downRemain == 0)
                 MoveDir = nextDir;
-            if (enemyList.Any(e => e.transform.position.y < Player.worldBottom))
+            if (enemyList.Any(e => e.transform.position.z < Player.worldBottom))
             {
                 // Game Over
             }
