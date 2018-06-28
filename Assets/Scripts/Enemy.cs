@@ -34,7 +34,6 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other);
         if (other.gameObject.tag == "Bullet")
         {
             Player.Score += Score;

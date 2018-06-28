@@ -16,6 +16,6 @@ public class Score : MonoBehaviour
     void Update()
     {
         var text = GetComponent<Text>();
-        text.text = "SCORE:\n" + Player.Score;
+        text.text = "SCORE: " + Player.Score + "\n残機: " + Player.Life;
     }
 }

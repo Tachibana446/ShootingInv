@@ -24,6 +24,11 @@ public class Player : MonoBehaviour
     /// </summary>
     const float worldRate = 0.85f;
 
+    /// <summary>
+    /// 撃墜されたときの残り無敵フレーム
+    /// </summary>
+    int remainReturn = 0;
+
     // Use this for initialization
     void Start()
     {
@@ -45,6 +50,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         InputKeys();
+        ReturnTime();
     }
 
     int remainShot = 0;
@@ -80,6 +86,38 @@ public class Player : MonoBehaviour
             // TODO:SE
         }
         remainShot--;
+    }
+
+    /// <summary>
+    /// 被弾
+    /// </summary>
+    /// <param name="other"></param>
+    private void OnTriggerEnter(Collider other)
+    {
+        if (remainReturn > 0)
+            return;
+        if (other.gameObject.tag == "EnemyBullet")
+        {
+            // TODO SE
+            Life--;
+            if (Life <= 0)
+            {
+                // GAME OVER
+            }
+            remainReturn = 60;
+        }
+    }
+
+    void ReturnTime()
+    {
+        remainReturn--;
+        if (remainReturn > 0)
+        {
+            if (remainReturn / 10 % 2 == 0)
+                gameObject.transform.localScale = new Vector3(1, 1, 1);
+            else
+                gameObject.transform.localScale = Vector3.zero;
+        }
     }
 }
 
