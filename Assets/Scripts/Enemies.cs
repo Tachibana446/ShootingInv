@@ -9,6 +9,7 @@ using UnityEngine;
 public class Enemies : MonoBehaviour
 {
     public Enemy enemyPrefab;
+    public Bullet bulletPrefab;
     private List<Enemy> enemyList = new List<Enemy>();
 
     int frame = 0;
@@ -21,6 +22,8 @@ public class Enemies : MonoBehaviour
     Direction nextDir;
     int downRemain;
     int speed = 60;
+
+    int attackSpeed = 60; // 30にしたら弾幕になってしまった
 
     // Use this for initialization
     void Start()
@@ -46,6 +49,10 @@ public class Enemies : MonoBehaviour
             Move();
             remainMoveFrame = speed;
         }
+        // attack
+        if ((frame + 15) % attackSpeed == 0)
+            Attack();
+
         frame++;
     }
 
@@ -115,6 +122,25 @@ public class Enemies : MonoBehaviour
                 // Game Over
             }
         }
+    }
+
+    void Attack()
+    {
+        int num = Mathf.Min(3, enemyList.Count);
+        List<int> index = new List<int>();
+        while (num > 0)
+        {
+            int i = Random.Range(0, enemyList.Count);
+            if (index.Contains(i))
+                continue;
+            index.Add(i);
+            num--;
+        }
+        index.ForEach(i =>
+        {
+            var b = Instantiate(bulletPrefab);
+            b.transform.position = enemyList[i].transform.position;
+        });
     }
 
     enum Direction

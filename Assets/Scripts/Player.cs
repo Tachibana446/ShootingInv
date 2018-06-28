@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    /// <summary>
+    /// スコア
+    /// </summary>
     public static int Score = 0;
+    /// <summary>
+    /// 残機
+    /// </summary>
+    public static int Life = 3;
+
     public Bullet bulletPrefab;
 
     public float move = 0.3f;

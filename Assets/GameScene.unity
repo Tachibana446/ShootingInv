@@ -397,6 +397,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 114457657737884196, guid: 16dfda03e0cf6cc4d88413c03f17e224,
     type: 2}
+  bulletPrefab: {fileID: 114501713051176296, guid: 0fdf8aeeaaa249344b281e3aaa99fa2f,
+    type: 2}
 --- !u!4 &689862471
 Transform:
   m_ObjectHideFlags: 0

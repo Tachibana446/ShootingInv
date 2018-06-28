@@ -19,5 +19,12 @@ public class Bullet : MonoBehaviour
         var pos = transform.position;
         pos.z += Speed;
         transform.position = pos;
+
+        // 範囲外で消去
+        if (transform.position.x > 30 || transform.position.x < -30 ||
+            transform.position.z > 30 || transform.position.z < -30)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
