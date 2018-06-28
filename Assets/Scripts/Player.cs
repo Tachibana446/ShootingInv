@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +14,11 @@ public class Player : MonoBehaviour
     /// </summary>
     public static int Life = 3;
     public static bool isClear = false;
+
+    public static void Init()
+    {
+        Score = 0; Life = 3; isClear = false;
+    }
 
     public Bullet bulletPrefab;
 
