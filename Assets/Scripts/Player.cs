@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     /// 残機
     /// </summary>
     public static int Life = 3;
+    public static bool isClear = false;
 
     public Bullet bulletPrefab;
 
@@ -49,6 +50,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Life <= 0)
+            return;
+
         InputKeys();
         ReturnTime();
     }

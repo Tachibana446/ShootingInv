@@ -38,6 +38,9 @@ public class Enemies : MonoBehaviour
 
     void Update()
     {
+        if (Player.Life <= 0)
+            return;
+
         if (!isAppeared)
             Appear();
 
@@ -52,6 +55,9 @@ public class Enemies : MonoBehaviour
         // attack
         if ((frame + 15) % attackSpeed == 0)
             Attack();
+
+        if (enemyList.Count == 0)
+            Player.isClear = true;
 
         frame++;
     }
@@ -120,6 +126,7 @@ public class Enemies : MonoBehaviour
             if (enemyList.Any(e => e.transform.position.z < Player.worldBottom))
             {
                 // Game Over
+                Player.Life = 0;
             }
         }
     }

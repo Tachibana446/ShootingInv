@@ -16,6 +16,9 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Player.Life <= 0)
+            return;
+
         var pos = transform.position;
         pos.z += Speed;
         transform.position = pos;
